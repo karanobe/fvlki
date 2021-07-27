@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"><title>FAQ</title><!-- Convert --><!--script(type="text/javascript" src="//cdn-3.convertexperiments.com/js/1003151-1003101.js")--><meta name="description" content="Read Dr. Mark Sivieri’s breakthrough report on the causes of reduced mobility, and the epidemic of fatigue, brain fog, and chronic inflammation that is sweeping the country."><meta name="keywords" content="Dr. Mark Sivieri, Vitalifi, VitaCell, inflamm"><meta name="author" content="Vitalifi"><meta name="robots" content="noindex, nofollow"><link rel="preconnect" href="//www.google-analytics.com" crossorigin><!-- Google Tag Manager -->
+
+	<!-- <link rel="stylesheet" type="text/css" href="normalize.css"> -->
+
+        <script src="https://unpkg.com/jquery"></script>
+        <script src="https://unpkg.com/survey-jquery@1.8.53/survey.jquery.min.js"></script>
+        <link href="https://unpkg.com/survey-core@1.8.53/modern.min.css" type="text/css" rel="stylesheet"/>
+	<!-- <script src="script.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: ['Lato', 'Lato:700', 'PT Sans', 'Noto Serif', 'Noto Serif:700', 'Over the Rainbow']
+			}
+		});
+	</script>
+
+     <script>
+
+    function readImage(input) {
+        if ( input.files && input.files[0] ) {
+            var FR= new FileReader();
+            FR.onload = function(e) {
+                // small preview
+                 $('#img').attr( "src", e.target.result );
+                // large preview
+                 $('#imgLarge').attr( "src", e.target.result );             
+                 //$('#base').text( e.target.result ); //this is the base64 encoded image
+                 var img = e.target.result;
+            };       
+            FR.readAsDataURL( input.files[0] );
+        }
+    }
+
+    function removeImage() {
+        jQuery('#img').removeAttr('src');
+        jQuery('#imgLarge').removeAttr('src');
+
+    }
+
+
+
+    Survey
+        .StylesManager
+        .applyTheme("modern");
+
+    var json = {
+        "title": "Survey Title&Logo demo",
+        "description": "Please take look at the survey title and logo. Test the settings on the right panel ->",
+        "logo": "https://surveyjs.io/favicon.ico",
+        "logoWidth": 60,
+        "logoHeight": 60,
+        "questions": [
+            {
+                "name": "name",
+                "type": "text",
+                "title": "Please enter your name:",
+                "placeHolder": "Jon Snow",
+                "isRequired": true
+            }, {
+                "name": "birthdate",
+                "type": "text",
+                "inputType": "date",
+                "title": "Your birthdate:",
+                "isRequired": true
+            }, {
+                "name": "color",
+                "type": "text",
+                "inputType": "color",
+                "title": "Your favorite color:"
+            }, {
+                "name": "email",
+                "type": "text",
+                "inputType": "email",
+                "title": "Your e-mail:",
+                "placeHolder": "jon.snow@nightwatch.org",
+                "isRequired": true,
+                "validators": [
+                    {
+                        "type": "email"
+                    }
+                ]
+            }
+        ]
+    };
+
+    window.survey = new Survey.Model(json);
+
+    survey
+        .onComplete
+        .add(function (sender) {
+            document
+                .querySelector('#surveyResult')
+                .textContent = "Result JSON:\n" + JSON.stringify(sender.data, null, 3);
+        });
+
+    $("#surveyElement").Survey({model: survey});
+
+
+
+    </script>
+</head>
+<body>
+
+
+<input type='file' id="asd" onchange="readImage( this )"/>
+<button onclick="removeImage()">Delete Image</button>
+<img id="img" style="max-width: 300px;" src="" />
+<img id="imgLarge" style="max-width: 800px;" src="" />
+<div id="base"></div>
+
+        <div id="surveyElement" style="display:inline-block;width:100%;"></div>
+        <div id="surveyResult"></div>
+        
+
+</body>
+</html>
